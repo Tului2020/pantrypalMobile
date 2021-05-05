@@ -17,6 +17,9 @@ target 'pantrypalMobile' do
     # Pods for testing
   end
 
+  # pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
