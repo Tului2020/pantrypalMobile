@@ -5,6 +5,7 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.userLoginAction = this.userLoginAction.bind(this);
+    this.pressHandler = this.pressHandler.bind(this);
     this.usernameInput = this.usernameInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
     this.state = {username: '', password: ''}
