@@ -13,9 +13,6 @@ const screens = {
   },
   PantryPage: {
     screen: PantryPage,
-    navigationOptions: {
-      headerShown: false,
-    }
   },
   RecipesPage: {
     screen: RecipesPage,

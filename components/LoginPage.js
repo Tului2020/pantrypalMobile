@@ -11,10 +11,12 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <View>
-        {/* <Image source={require('../images/pantrypal.png')} style={styles.img}/> */}
-        <TextInput value={this.state.username} placeholder='Username' style={styles.input}/>
-        <TextInput value={this.state.password} placeholder='Password' style={styles.input}/>
+      <View  style={styles.view}>
+        <Image source={require('../images/pantrypal.png')} style={styles.img}/>
+        <View>
+          <TextInput value={this.state.username} placeholder='Username' style={[styles.input, styles.username]}/>
+          <TextInput value={this.state.password} placeholder='Password' style={[styles.input, styles.password]}/>
+        </View>
         <Button title='Login' onPress={this.pressHandler}/>
       </View>
     )
@@ -41,7 +43,16 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderRadius: 20 
+    borderRadius: 8,
+    width: `50%`,
+    height: 40,
+    position: 'absolute',    
+  },
+
+
+  view: {
+    paddingTop: 40,
+    alignItems: 'center'
   }
 })
 
