@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderRadius: 8,
-    width: `50%`,
+    width: 200,
     height: 40,  
   },
   loginView: {
