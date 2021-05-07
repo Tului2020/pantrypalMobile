@@ -10,7 +10,7 @@ const RootReducer = combineReducers({
   entities: entitiesReducer,
   errors,
   session,
-  ui: uiReducer
+  // ui: uiReducer
 });
 
 export default RootReducer;

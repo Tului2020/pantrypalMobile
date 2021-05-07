@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
+import { connect } from 'react-redux';
+
+import { login } from '../actions/session_actions';
 import axios from 'axios';
+import computerIPAddress from '../../IPAddress'
 
-
-const computerIPAddress = 'http://10.0.0.240';
 
 
 class LoginPage extends React.Component {
@@ -87,6 +89,29 @@ const styles = StyleSheet.create({
 
 
 
-export default LoginPage;
+
+
+const mapStateToProps = (state) => {
+  return {
+    errors: state.errors.session,
+    isAuthenticated: state.session.isAuthenticated
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: user => dispatch(login(user)),
+    closeModal: () => dispatch(closeModal()),
+  }
+}
+
+const LoginFormContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginPage);
+
+export default LoginFormContainer;
+
+
 
 

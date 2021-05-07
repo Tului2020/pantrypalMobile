@@ -12,6 +12,7 @@ import RootReducer from './src/reducers/root_reducer';
 const Stack = createStackNavigator();
 const store = createStore(RootReducer)
 
+console.log(store.getState())
 
 class App extends React.Component {
 
