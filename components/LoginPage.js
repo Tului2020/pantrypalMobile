@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
+const mongoose = require('mongoose')
 
 
+const loginInfo = {
+  mongoURI: 'mongodb+srv://dev:9RxznItyKk07asQl@cluster0.c4zda.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+  secretOrKey: 'QCQyFwffjV'
+}
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -43,8 +48,8 @@ class LoginPage extends React.Component {
   }
 
   userLoginAction() {
-    mongoose
-      .connect(loginInfo.mongoURI,  { useNewUrlParser: true })
+    console.log(mongoose.connect)
+    // mongoose.connect(loginInfo.mongoURI,   { useNewUrlParser: true, useUnifiedTopology: true })
     // console.log([this.state.username, this.state.password])
   }
 
