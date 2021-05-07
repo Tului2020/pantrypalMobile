@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
-const mongoose = require('mongoose')
+import axios from 'axios';
 
 
-const loginInfo = {
-  mongoURI: 'mongodb+srv://dev:9RxznItyKk07asQl@cluster0.c4zda.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-  secretOrKey: 'QCQyFwffjV'
-}
+const computerIPAddress = 'http://10.0.0.240';
+
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -33,6 +31,8 @@ class LoginPage extends React.Component {
     )
   }
 
+
+
   usernameInput(username) {
     this.setState({username})
   }
@@ -43,14 +43,18 @@ class LoginPage extends React.Component {
 
 
   pressHandler() {
+
+    this.setState({username: 'demo@gmail.com', password: '123456'})
     const { navigation } = this.props;
     navigation.navigate('PantryPage')
   }
 
   userLoginAction() {
-    console.log(mongoose.connect)
-    // mongoose.connect(loginInfo.mongoURI,   { useNewUrlParser: true, useUnifiedTopology: true })
-    // console.log([this.state.username, this.state.password])
+    axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
+      method: 'GET'
+    })
+      .then(({data}) => console.log(JSON.stringify(data, null, 2)))
+      .catch(err => console.log(err))
   }
 
 
@@ -73,7 +77,6 @@ const styles = StyleSheet.create({
   loginView: {
     position: 'absolute',
     marginTop: 40
-    // flex: 2
   },  
 
   view: {

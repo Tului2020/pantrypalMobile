@@ -5,15 +5,15 @@ const db = require('./config/keys_dev').mongoURI;
 const ingredients = require('./routes/api/ingredients');
 const recipes = require('./routes/api/recipes');
 const users = require('./routes/api/users');
-
+const cors = require('cors');
 
 mongoose
-  .connect(db, { useNewUrlParser: true})
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => console.log('MongoDB Connected!!!!!!!!!!!!'))
   .catch(err => console.log(err))
 
 
-app.get('/', (req, res) => res.send('SUp World!'));
+app.use(cors());
 app.use('/api/users', users);
 app.use('/api/ingredients', ingredients);
 app.use('/api/recipes', recipes);
