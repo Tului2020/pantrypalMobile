@@ -27,6 +27,8 @@ class LoginPage extends React.Component {
     )
   }
 
+
+
   usernameInput(username) {
     this.setState({username})
   }
@@ -37,13 +39,17 @@ class LoginPage extends React.Component {
 
 
   pressHandler() {
+
+    this.setState({username: 'demo', password: '123456'})
     const { navigation } = this.props;
     navigation.navigate('PantryPage')
   }
 
   userLoginAction() {
-    axios.get('/api/ingredients/apple')
-      .then(res => console.log(res))
+    axios('http://10.0.0.240:5000/api/ingredients/apple', {
+      method: 'GET'
+    })
+      .then(({data}) => console.log(JSON.stringify(data, null, 2)))
       .catch(err => console.log(err))
   }
 
@@ -67,7 +73,6 @@ const styles = StyleSheet.create({
   loginView: {
     position: 'absolute',
     marginTop: 40
-    // flex: 2
   },  
 
   view: {
