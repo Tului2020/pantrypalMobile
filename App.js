@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Stacks from './components/Stacks';
+import Stacks from './src/components/Stacks';
 
 class App extends React.Component {
 
@@ -11,7 +11,6 @@ class App extends React.Component {
       </View>
     )
   }
-
 
 }
 

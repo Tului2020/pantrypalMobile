@@ -2,6 +2,10 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import axios from 'axios';
 
+
+const computerIPAddress = 'http://10.0.0.240';
+
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -40,13 +44,13 @@ class LoginPage extends React.Component {
 
   pressHandler() {
 
-    this.setState({username: 'demo', password: '123456'})
+    this.setState({username: 'demo@gmail.com', password: '123456'})
     const { navigation } = this.props;
     navigation.navigate('PantryPage')
   }
 
   userLoginAction() {
-    axios('http://10.0.0.240:5000/api/ingredients/apple', {
+    axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
       method: 'GET'
     })
       .then(({data}) => console.log(JSON.stringify(data, null, 2)))
