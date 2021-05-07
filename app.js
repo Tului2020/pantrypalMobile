@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigator from './routes/homeStack';
+import Navigator from './routes/homeStack'
 
 
 class App extends React.Component {
@@ -8,6 +8,12 @@ class App extends React.Component {
       <Navigator />
     )
   }
+
+
 }
 
+
+
 export default App;
+
+

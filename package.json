@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "^5.9.4",
+    "mongoose": "^5.11.17",
     "react": "17.0.1",
     "react-native": "0.64.1",
     "react-native-gesture-handler": "^1.10.3",
