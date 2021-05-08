@@ -47,19 +47,26 @@ class LoginPage extends React.Component {
   pressHandler() {
 
     this.setState({username: 'demo@gmail.com', password: '123456'})
-    const { navigation } = this.props;
-    navigation.navigate('PantryPage')
+    // const { navigation } = this.props;
+    // navigation.navigate('PantryPage')
   }
 
   userLoginAction() {
-    axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
-      method: 'GET'
-    })
-      .then(({data}) => console.log(JSON.stringify(data, null, 2)))
-      .catch(err => console.log(err))
+  //   axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
+  //     method: 'GET'
+  //   })
+  //     .then(({data}) => console.log(JSON.stringify(data, null, 2)))
+  //     .catch(err => console.log(err))
+  // }
+
+  let user = {
+    email: this.state.email,
+    password: this.state.password
+  };
+
+  this.props.login(user)
+
   }
-
-
 
 }
 
@@ -101,7 +108,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: user => dispatch(login(user)),
-    closeModal: () => dispatch(closeModal()),
   }
 }
 
