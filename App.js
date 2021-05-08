@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import LoginPage from './src/components/LoginPage';
 import PantryPage from './src/components/PantryPage';
 import RecipesPage from './src/components/RecipesPage';
-import RootReducer from './src/reducers/root_reducer';
+import configureStore from './src/store/store';
+
 
 const Stack = createStackNavigator();
-const store = createStore(RootReducer)
+const store = configureStore()
 
 console.log(store.getState())
 
