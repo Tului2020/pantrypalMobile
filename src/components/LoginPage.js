@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
+import { connect } from 'react-redux';
+
+import { login } from '../actions/session_actions';
 import axios from 'axios';
+import computerIPAddress from '../../IPAddress'
 
-
-const computerIPAddress = 'http://10.0.0.240';
 
 
 class LoginPage extends React.Component {
@@ -45,19 +47,26 @@ class LoginPage extends React.Component {
   pressHandler() {
 
     this.setState({username: 'demo@gmail.com', password: '123456'})
-    const { navigation } = this.props;
-    navigation.navigate('PantryPage')
+    // const { navigation } = this.props;
+    // navigation.navigate('PantryPage')
   }
 
   userLoginAction() {
-    axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
-      method: 'GET'
-    })
-      .then(({data}) => console.log(JSON.stringify(data, null, 2)))
-      .catch(err => console.log(err))
+  //   axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
+  //     method: 'GET'
+  //   })
+  //     .then(({data}) => console.log(JSON.stringify(data, null, 2)))
+  //     .catch(err => console.log(err))
+  // }
+
+  let user = {
+    email: this.state.email,
+    password: this.state.password
+  };
+
+  this.props.login(user)
+
   }
-
-
 
 }
 
@@ -87,6 +96,28 @@ const styles = StyleSheet.create({
 
 
 
-export default LoginPage;
+
+
+const mapStateToProps = (state) => {
+  return {
+    errors: state.errors.session,
+    isAuthenticated: state.session.isAuthenticated
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: user => dispatch(login(user)),
+  }
+}
+
+const LoginFormContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginPage);
+
+export default LoginFormContainer;
+
+
 
 
