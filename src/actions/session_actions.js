@@ -1,8 +1,7 @@
 import * as APIUtil from '../util/session_api_util';
 import jwt_decode from 'jwt-decode';
 import { updateUser } from './user_actions';
-// import { AsyncStorage } from '@react-native-community/async-storage';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from '@react-native-community/async-storage';
 
 
 
@@ -48,12 +47,10 @@ export const signup = user => dispatch => (
 export const login = user => dispatch => (
   APIUtil.login(user)
     .then(res => {
-      // console.log(res.data.userInfo)
       const { token } = res.data;
-      console.log(token)
       AsyncStorage.setItem('jwtToken', token);
-      // APIUtil.setAuthToken(token);
-      // const decoded = jwt_decode(token);
+      APIUtil.setAuthToken(token);
+      const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(Object.assign({}, decoded, res.data.userInfo)))
       dispatch(updateUser(res.data.userInfo))
     })

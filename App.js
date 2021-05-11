@@ -8,11 +8,9 @@ import PantryPage from './src/components/PantryPage';
 import RecipesPage from './src/components/RecipesPage';
 import configureStore from './src/store/store';
 
-
 const Stack = createStackNavigator();
 const store = configureStore()
 
-// console.log(store.getState())
 
 class App extends React.Component {
 
