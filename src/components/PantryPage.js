@@ -10,7 +10,10 @@ class PantryPage extends React.Component {
       <View>
 
         <Text>This is the Pantry Page</Text>
-        <Button title='button' onPress={() => console.log(AsyncStorage.getItem('jwtToken'))}/>
+        <Button title='button' onPress={() => {
+          console.log(AsyncStorage.getItem('jwtToken'))
+          console.log('successful button click')
+          }}/>
       </View>
     )
   }
