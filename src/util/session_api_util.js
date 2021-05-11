@@ -1,4 +1,6 @@
 import axios from 'axios';
+import computerIPAddress from '../../IPAddress'
+
 
 export const setAuthToken = token => {
   if (token) {
@@ -9,15 +11,15 @@ export const setAuthToken = token => {
 };
 
 export const signup = (userData) => {
-  return axios.post('/api/users/register', userData);
+  return axios.post(`${computerIPAddress}:5000/api/users/register`, userData);
 };
 
 export const login = (userData) => {
-  return axios.post('/api/users/login', userData);
+  return axios.post(`${computerIPAddress}:5000/api/users/login`, userData);
 };
 
 export const getUserInfo = () => {
-  return axios.get("/api/users/current", {
+  return axios.get(`${computerIPAddress}:5000/api/users/current`, {
     headers: { Authorization: localStorage.jwtToken },
   });
 };

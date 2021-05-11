@@ -68,7 +68,6 @@ class LoginPage extends React.Component {
   this.props.login(user)
     .then(res => console.log(res))
     .catch(err => console.log(err))
-
   }
 
 }
