@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, Button, StyleSheet} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 class PantryPage extends React.Component {
   render() {
     return (
       // 
-      <Text>This is the Pantry Page</Text>
+      <View>
+
+        <Text>This is the Pantry Page</Text>
+        <Button title='button' onPress={() => console.log(AsyncStorage.getItem('jwtToken'))}/>
+      </View>
     )
   }
 
