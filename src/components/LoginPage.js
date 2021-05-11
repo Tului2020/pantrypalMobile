@@ -46,20 +46,10 @@ class LoginPage extends React.Component {
 
 
   pressHandler() {
-
     this.setState({username: 'demo@gmail.com', password: '123456'})
-    // const { navigation } = this.props;
-    // navigation.navigate('PantryPage')
   }
 
   userLoginAction() {
-  //   axios(`${computerIPAddress}:5000/api/ingredients/apple`, {
-  //     method: 'GET'
-  //   })
-  //     .then(({data}) => console.log(JSON.stringify(data, null, 2)))
-  //     .catch(err => console.log(err))
-  // }
-
   let user = {
     email: this.state.username,
     password: this.state.password

@@ -1,6 +1,10 @@
 import * as APIUtil from '../util/session_api_util';
 import jwt_decode from 'jwt-decode';
 import { updateUser } from './user_actions';
+// import { AsyncStorage } from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
+
+
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
@@ -44,19 +48,16 @@ export const signup = user => dispatch => (
 export const login = user => dispatch => (
   APIUtil.login(user)
     .then(res => {
+      // console.log(res.data.userInfo)
       const { token } = res.data;
-      localStorage.setItem('jwtToken', token);
-      APIUtil.setAuthToken(token);
-      const decoded = jwt_decode(token);
-
-
+      console.log(token)
+      AsyncStorage.setItem('jwtToken', token);
+      // APIUtil.setAuthToken(token);
+      // const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(Object.assign({}, decoded, res.data.userInfo)))
       dispatch(updateUser(res.data.userInfo))
-
-
     })
   .catch(err => {
-    dispatch(receiveErrors(err.response.data));
     dispatch(receiveErrors(err));
   })
 )
