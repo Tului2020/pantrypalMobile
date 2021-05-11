@@ -15,6 +15,7 @@ export const signup = (userData) => {
 };
 
 export const login = (userData) => {
+  console.log(userData)
   return axios.post(`${computerIPAddress}:5000/api/users/login`, userData);
 };
 
