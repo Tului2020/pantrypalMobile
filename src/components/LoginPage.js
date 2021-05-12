@@ -55,12 +55,13 @@ class LoginPage extends React.Component {
     password: this.state.password
   };
 
+  console.log('clicked')
   this.props.login(user)
-    .then(res => {
-      const { navigation } = this.props;
-      navigation.navigate('PantryPage')
-      })
-    .catch(err => console.log(err))
+    // .then(res => {
+    //   const { navigation } = this.props;
+    //   navigation.navigate('PantryPage')
+    //   })
+    // .catch(err => console.log(err))
   }
 
 }
@@ -93,10 +94,10 @@ const styles = StyleSheet.create({
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({errors, session}) => {
   return {
-    errors: state.errors.session,
-    isAuthenticated: state.session.isAuthenticated
+    errors: errors.session,
+    isAuthenticated: session.isAuthenticated
   };
 };
 

@@ -44,9 +44,13 @@ export const signup = user => dispatch => (
 
 
 
-export const login = user => dispatch => (
+export const login = user => dispatch => {
+  console.log('clciked 2')
+
+  
   APIUtil.login(user)
     .then(res => {
+      console.log(res.data.userInfo)
       const { token } = res.data;
       AsyncStorage.setItem('jwtToken', token);
       APIUtil.setAuthToken(token);
@@ -57,7 +61,8 @@ export const login = user => dispatch => (
   .catch(err => {
     dispatch(receiveErrors(err));
   })
-)
+}
+
 
 
 
