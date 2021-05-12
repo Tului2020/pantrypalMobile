@@ -55,13 +55,7 @@ class LoginPage extends React.Component {
     password: this.state.password
   };
 
-  console.log('clicked')
   this.props.login(user)
-    // .then(res => {
-    //   const { navigation } = this.props;
-    //   navigation.navigate('PantryPage')
-    //   })
-    // .catch(err => console.log(err))
   }
 
 }

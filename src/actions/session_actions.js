@@ -45,14 +45,11 @@ export const signup = user => dispatch => (
 
 
 export const login = user => dispatch => {
-  console.log('clciked 2')
-
-  
   APIUtil.login(user)
     .then(res => {
-      console.log(res.data.userInfo)
+      console.log('API.login(user) working')
       const { token } = res.data;
-      AsyncStorage.setItem('jwtToken', token);
+      localStorage.setItem('jwtToken', token);
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(Object.assign({}, decoded, res.data.userInfo)))
