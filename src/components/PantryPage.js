@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, Button, StyleSheet} from 'react-native';
+import {View, Text, Image, TextInput, Button, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
@@ -11,7 +11,6 @@ class PantryPage extends React.Component {
 
         <Text>This is the Pantry Page</Text>
         <Button title='button' onPress={() => {
-          console.log(AsyncStorage.getItem('jwtToken'))
           console.log('successful button click')
           }}/>
       </View>
@@ -22,6 +21,12 @@ class PantryPage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    borderRadius: 8,
+    width: 200,
+    height: 40,  
+  },
   img: {
     width: `100%`,
     height: `80%`,

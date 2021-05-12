@@ -16,8 +16,10 @@ class LoginPage extends React.Component {
     this.pressHandler = this.pressHandler.bind(this);
     this.usernameInput = this.usernameInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
-    this.state = {username: '', password: ''}
+    this.state = {username: '', password: '', tempPhrase: ''}
 
+
+    this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
   }
 
   render() {
@@ -30,9 +32,22 @@ class LoginPage extends React.Component {
         </View>
         <Button title='Login' onPress={this.userLoginAction}/>
         <Button title='Demo' onPress={this.pressHandler}/>
+
+        <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/>
+        {/* <TextInput value={this.state.tempPhrase} style={styles.input} onChange={this.changeStoragePhrase}/> */}
+        <Button title='Save Data' onPress={() => _storeData()}/>
+
+        <Button title='See Data' onPress={() =>_retrieveData()}/>
+
+
       </View>
     )
   }
+
+  changeStoragePhrase(storagePhrase) {
+    this.setState({tempPhrase: storagePhrase})
+  }
+
 
 
 
@@ -56,6 +71,9 @@ class LoginPage extends React.Component {
   };
 
   this.props.login(user)
+  const {navigation} = this.props;
+  navigation.navigate('PantryPage')
+
   }
 
 }
@@ -109,5 +127,26 @@ const LoginFormContainer = connect(
 export default LoginFormContainer;
 
 
+_storeData = async () => {
+  try {
+    await AsyncStorage.setItem(
+      '@MySuperStore:key',
+      'I like to save it.'
+    );
+  } catch (error) {
+    // Error saving data
+  }
+};
 
 
+_retrieveData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@MySuperStore:key');
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+};
