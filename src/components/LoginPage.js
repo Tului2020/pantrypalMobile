@@ -1,31 +1,29 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import * as AsyncStorageAll from '@react-native-community/async-storage';
-const AsyncStorage = AsyncStorageAll.default
-
-// debugger
 
 
 import { login } from '../actions/session_actions';
 import axios from 'axios';
 import computerIPAddress from '../../IPAddress'
+import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
 
 
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
+
+    // all bindings
     this.userLoginAction = this.userLoginAction.bind(this);
     this.pressHandler = this.pressHandler.bind(this);
     this.usernameInput = this.usernameInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
-    _storeData = _storeData.bind(this);
-    
+    this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
+
+    // declaring state
     this.state = {username: '', password: '', tempPhrase: ''}
 
-
-    this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
   }
 
   render() {
@@ -41,13 +39,10 @@ class LoginPage extends React.Component {
         <Button title='Demo' onPress={this.pressHandler}/>
 
         <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/>
-        {/* <TextInput value={this.state.tempPhrase} style={styles.input} onChange={this.changeStoragePhrase}/> */}
-        <Button title='Save Data' onPress={() => {
-          _storeData()
-        
-        }}/>
 
-        <Button title='See Data' onPress={() =>_retrieveData()}/>
+        <Button title='Save Data' onPress={() => storeDataLocal(this.state.tempPhrase)}/>
+        <Button title='See Data' onPress={() => retrieveDataLocal()}/>
+        <Button title='Remove Data' onPress={() => removeDataLocal()}/>
 
 
       </View>
@@ -72,6 +67,7 @@ class LoginPage extends React.Component {
 
   pressHandler() {
     this.setState({username: 'demo@gmail.com', password: '123456'})
+    this.userLoginAction();
   }
 
   userLoginAction() {
@@ -134,31 +130,6 @@ const LoginFormContainer = connect(
   mapDispatchToProps
 )(LoginPage);
 
-
-_storeData = async () => {
-  // debugger
-  try {
-    await AsyncStorage.setItem(
-      '@MySuperStore:key',
-      'I like to save it.'
-    );
-  } catch (error) {
-    // Error saving data
-  }
-};
-
-
-_retrieveData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@MySuperStore:key');
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
-    }
-  } catch (error) {
-    // Error retrieving data
-  }
-};
 
 export default LoginFormContainer;
 
