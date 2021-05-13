@@ -46,6 +46,7 @@ class LoginPage extends React.Component {
 
   changeStoragePhrase(storagePhrase) {
     this.setState({tempPhrase: storagePhrase})
+    debugger
   }
 
 
