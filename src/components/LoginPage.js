@@ -19,10 +19,9 @@ class LoginPage extends React.Component {
     this.pressHandler = this.pressHandler.bind(this);
     this.emailInput = this.emailInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
-    this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
 
     // declaring state
-    this.state = {email: 'demo@gmail.com', password: '123456', tempPhrase: ''}
+    this.state = {email: 'demo@gmail.com', password: '123456'}
 
   }
 
@@ -37,22 +36,9 @@ class LoginPage extends React.Component {
         </View>
         <Button title='Login' onPress={this.userLoginAction}/>
         <Button title='Demo' onPress={this.pressHandler}/>
-
-        {/* <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/> */}
-
-        {/* <Button title='Save Data' onPress={() => storeDataLocal(this.state.tempPhrase)}/>
-        <Button title='See Data' onPress={() => retrieveDataLocal()}/>
-        <Button title='Remove Data' onPress={() => removeDataLocal()}/> */}
-
-
       </View>
     )
   }
-
-  changeStoragePhrase(storagePhrase) {
-    this.setState({tempPhrase: storagePhrase})
-  }
-
 
 
 
