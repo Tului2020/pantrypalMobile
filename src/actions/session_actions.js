@@ -46,8 +46,6 @@ export const signup = user => dispatch => (
 export const login = (user) => dispatch => {
   APIUtil.login(user)
     .then(res => {
-      console.log('API.login(user) working');
-
       const { token, userInfo } = res.data;
       storeDataLocal(token, 'jwtToken');
       APIUtil.setAuthToken(token);

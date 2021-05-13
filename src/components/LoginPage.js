@@ -17,12 +17,12 @@ class LoginPage extends React.Component {
     // all bindings
     this.userLoginAction = this.userLoginAction.bind(this);
     this.pressHandler = this.pressHandler.bind(this);
-    this.usernameInput = this.usernameInput.bind(this);
+    this.emailInput = this.emailInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
     this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
 
     // declaring state
-    this.state = {username: '', password: '', tempPhrase: ''}
+    this.state = {email: 'demo@gmail.com', password: '123456', tempPhrase: ''}
 
   }
 
@@ -32,7 +32,7 @@ class LoginPage extends React.Component {
       <View style={styles.view}>
         {/* <Image source={require('../images/pantrypal.png')} style={styles.img}/> */}
         <View style={styles.view}>
-          <TextInput value={this.state.username} placeholder='Username' style={styles.input} onChangeText={this.usernameInput}/>
+          <TextInput value={this.state.email} placeholder='Email' style={styles.input} onChangeText={this.emailInput}/>
           <TextInput value={this.state.password} placeholder='Password' style={styles.input} onChangeText={this.passwordInput} secureTextEntry={true}/>
         </View>
         <Button title='Login' onPress={this.userLoginAction}/>
@@ -56,8 +56,8 @@ class LoginPage extends React.Component {
 
 
 
-  usernameInput(username) {
-    this.setState({username})
+  emailInput(email) {
+    this.setState({email})
   }
 
   passwordInput(password) {
@@ -66,18 +66,16 @@ class LoginPage extends React.Component {
 
 
   pressHandler() {
-    this.setState({username: 'demo@gmail.com', password: '123456'})
+    this.setState({email: 'demo@gmail.com', password: '123456'})
     this.userLoginAction();
   }
 
   userLoginAction() {
-  let user = {
-    email: this.state.username,
-    password: this.state.password
-  };
+    let { email, password } = this.state
+    let user = { email, password };
 
-  const {navigation, login} = this.props;
-  login(user)
+    const {navigation, login} = this.props;
+    login(user)
 
   }
 
