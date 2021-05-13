@@ -38,11 +38,11 @@ class LoginPage extends React.Component {
         <Button title='Login' onPress={this.userLoginAction}/>
         <Button title='Demo' onPress={this.pressHandler}/>
 
-        <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/>
+        {/* <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/> */}
 
-        <Button title='Save Data' onPress={() => storeDataLocal(this.state.tempPhrase)}/>
+        {/* <Button title='Save Data' onPress={() => storeDataLocal(this.state.tempPhrase)}/>
         <Button title='See Data' onPress={() => retrieveDataLocal()}/>
-        <Button title='Remove Data' onPress={() => removeDataLocal()}/>
+        <Button title='Remove Data' onPress={() => removeDataLocal()}/> */}
 
 
       </View>

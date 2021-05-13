@@ -21,6 +21,6 @@ export const login = (userData) => {
 
 export const getUserInfo = () => {
   return axios.get(`${computerIPAddress}:5000/api/users/current`, {
-    headers: { Authorization: localStorage.jwtToken },
+    headers: { Authorization: localStorage.jwtToken }, // Need to fix this
   });
 };
