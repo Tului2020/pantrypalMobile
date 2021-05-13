@@ -1,6 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import * as AsyncStorageAll from '@react-native-community/async-storage';
+const AsyncStorage = AsyncStorageAll.default
+
+// debugger
 
 
 import { login } from '../actions/session_actions';
@@ -16,6 +20,8 @@ class LoginPage extends React.Component {
     this.pressHandler = this.pressHandler.bind(this);
     this.usernameInput = this.usernameInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
+    _storeData = _storeData.bind(this);
+    
     this.state = {username: '', password: '', tempPhrase: ''}
 
 
@@ -23,6 +29,7 @@ class LoginPage extends React.Component {
   }
 
   render() {
+    // debugger
     return (
       <View style={styles.view}>
         {/* <Image source={require('../images/pantrypal.png')} style={styles.img}/> */}
@@ -35,7 +42,10 @@ class LoginPage extends React.Component {
 
         <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/>
         {/* <TextInput value={this.state.tempPhrase} style={styles.input} onChange={this.changeStoragePhrase}/> */}
-        <Button title='Save Data' onPress={() => _storeData()}/>
+        <Button title='Save Data' onPress={() => {
+          _storeData()
+        
+        }}/>
 
         <Button title='See Data' onPress={() =>_retrieveData()}/>
 
@@ -46,7 +56,6 @@ class LoginPage extends React.Component {
 
   changeStoragePhrase(storagePhrase) {
     this.setState({tempPhrase: storagePhrase})
-    debugger
   }
 
 
@@ -125,10 +134,9 @@ const LoginFormContainer = connect(
   mapDispatchToProps
 )(LoginPage);
 
-export default LoginFormContainer;
-
 
 _storeData = async () => {
+  // debugger
   try {
     await AsyncStorage.setItem(
       '@MySuperStore:key',
@@ -151,3 +159,8 @@ _retrieveData = async () => {
     // Error retrieving data
   }
 };
+
+export default LoginFormContainer;
+
+
+
