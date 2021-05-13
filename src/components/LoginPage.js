@@ -1,15 +1,12 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import * as AsyncStorageAll from '@react-native-community/async-storage';
-const AsyncStorage = AsyncStorageAll.default
-
-// debugger
 
 
 import { login } from '../actions/session_actions';
 import axios from 'axios';
 import computerIPAddress from '../../IPAddress'
+import {storeDataLocal, retrieveDataLocal} from '../AsyncStorageHandler'
 
 
 
@@ -43,8 +40,8 @@ class LoginPage extends React.Component {
 
         <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/>
 
-        <Button title='Save Data' onPress={() => _storeData(this.state.tempPhrase)}/>
-        <Button title='See Data' onPress={() =>_retrieveData()}/>
+        <Button title='Save Data' onPress={() => storeDataLocal(this.state.tempPhrase)}/>
+        <Button title='See Data' onPress={() =>retrieveDataLocal()}/>
 
 
       </View>
@@ -132,31 +129,6 @@ const LoginFormContainer = connect(
   mapDispatchToProps
 )(LoginPage);
 
-
-_storeData = async (token) => {
-  // debugger
-  try {
-    await AsyncStorage.setItem(
-      '@MySuperStore:key',
-      token
-    );
-  } catch (error) {
-    // Error saving data
-  }
-};
-
-
-_retrieveData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@MySuperStore:key');
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
-    }
-  } catch (error) {
-    // Error retrieving data
-  }
-};
 
 export default LoginFormContainer;
 

@@ -1,8 +1,8 @@
 import * as APIUtil from '../util/session_api_util';
 import jwt_decode from 'jwt-decode';
 import { updateUser } from './user_actions';
-import AsyncStorage from '@react-native-community/async-storage';
-
+import * as AsyncStorageAll from '@react-native-community/async-storage';
+const AsyncStorage = AsyncStorageAll.default
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
