@@ -27,14 +27,17 @@ class App extends React.Component {
             <Stack.Screen
               name="LoginPage"
               component={LoginPage}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="PantryPage"
               component={PantryPage}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="RecipesPage"
               component={RecipesPage}
+              options={{headerShown: true}}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -1,21 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {View, Text, Image, TextInput, Button, StyleSheet} from 'react-native';
 import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
+import { logout } from '../actions/session_actions';
 
 
 class PantryPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // all bindings
+    this.userLogoutAction = this.userLogoutAction.bind(this);
+
+  }
+
   render() {
     return (
       // 
       <View>
-
         <Text>This is the Pantry Page</Text>
-        <Button title='button' onPress={() => {
-          console.log('successful button click')
-          }}/>
+        <Button title='Logout' onPress={this.userLogoutAction}/>
       </View>
     )
   }
+
+  userLogoutAction() {
+    const {navigation, logout} = this.props;
+    logout();
+    navigation.navigate('LoginPage')
+
+  }
+
+  
 
 
 }
@@ -36,7 +52,26 @@ const styles = StyleSheet.create({
 })
 
 
+const mapStateToProps = ({errors, session}) => {
+  return {
+    errors: errors.session,
+    isAuthenticated: session.isAuthenticated
+  };
+};
 
-export default PantryPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  }
+}
+
+const PantryPageContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PantryPage);
+
+
+export default PantryPageContainer;
+
 
 

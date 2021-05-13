@@ -1,12 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-
-
 import { login } from '../actions/session_actions';
-import axios from 'axios';
-import computerIPAddress from '../../IPAddress'
-import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
 
 
 
