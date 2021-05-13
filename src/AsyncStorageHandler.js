@@ -1,39 +1,45 @@
 import * as AsyncStorageAll from '@react-native-community/async-storage';
 const AsyncStorage = AsyncStorageAll.default
 
+const defaultKey = 'jwtToken'
 
-export const storeDataLocal = async(value, key='jwt') => {
+
+export const storeDataLocal = async(value, key=defaultKey) => {
   try {
-    await AsyncStorage.setItem(
-      `@${key}`,
-      value
-    );
+    await AsyncStorage.setItem(`@${key}`, value);
+
   } catch (error) {
-    // Error saving data
+    console.log(error)
   }
 };
 
 
-export const retrieveDataLocal = async(key='jwt') => {
+// export const retrieveDataLocal = async(key=defaultKey) => {
+//   try {
+//     const value = await AsyncStorage.getItem(`@${key}`);
+//     if (value !== null) (value);
+
+//   } catch (error) {
+//     return error
+//   }
+// };
+
+export const retrieveDataLocal = async (key=defaultKey, cb=console.log) => {
   try {
-    const value = await AsyncStorage.getItem(`@${key}`);
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
-    }
+    const value = await AsyncStorage.getItem(`@${key}`, cb);
+    // debugger
+    if (value !== null) return (value);
+
   } catch (error) {
-    // Error retrieving data
+    return error
   }
 };
 
-export const removeDataLocal = async(key='jwt') => {
+
+export const removeDataLocal = async(key=defaultKey) => {
   try {
     const value = await AsyncStorage.removeItem(`@${key}`);
-    if (value !== null) {
-      // We have data!!
-      console.log(value);
-    }
   } catch (error) {
-    // Error retrieving data
+    console.log(error)
   }
 }

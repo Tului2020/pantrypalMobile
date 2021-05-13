@@ -1,8 +1,7 @@
 import * as APIUtil from '../util/session_api_util';
 import jwt_decode from 'jwt-decode';
 import { updateUser } from './user_actions';
-import * as AsyncStorageAll from '@react-native-community/async-storage';
-const AsyncStorage = AsyncStorageAll.default
+import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
@@ -49,7 +48,7 @@ export const login = user => dispatch => {
     .then(res => {
       console.log('API.login(user) working')
       const { token } = res.data;
-      localStorage.setItem('jwtToken', token);
+      storeDataLocal(token, 'jwtToken');
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(Object.assign({}, decoded, res.data.userInfo)))
