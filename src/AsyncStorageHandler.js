@@ -26,4 +26,14 @@ export const retrieveDataLocal = async(key='jwt') => {
   }
 };
 
-
+export const removeDataLocal = async(key='jwt') => {
+  try {
+    const value = await AsyncStorage.removeItem(`@${key}`);
+    if (value !== null) {
+      // We have data!!
+      console.log(value);
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+}

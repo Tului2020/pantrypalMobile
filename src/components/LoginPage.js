@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { login } from '../actions/session_actions';
 import axios from 'axios';
 import computerIPAddress from '../../IPAddress'
-import {storeDataLocal, retrieveDataLocal} from '../AsyncStorageHandler'
+import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
 
 
 
@@ -42,6 +42,7 @@ class LoginPage extends React.Component {
 
         <Button title='Save Data' onPress={() => storeDataLocal(this.state.tempPhrase)}/>
         <Button title='See Data' onPress={() =>retrieveDataLocal()}/>
+        <Button title='Remove Data' onPress={() =>removeDataLocal()}/>
 
 
       </View>
