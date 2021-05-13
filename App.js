@@ -10,7 +10,7 @@ import configureStore from './src/store/store';
 
 const Stack = createStackNavigator();
 const store = configureStore()
-
+global.store = store
 
 class App extends React.Component {
 

@@ -62,8 +62,12 @@ class LoginPage extends React.Component {
 
     const {navigation, login} = this.props;
     login(user)
-
   }
+
+  componentDidUpdate() {
+    debugger
+  }
+
 
 }
 

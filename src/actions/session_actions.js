@@ -43,7 +43,7 @@ export const signup = user => dispatch => (
 
 
 
-export const login = (user) => dispatch => {
+export const login = user => dispatch => {
   APIUtil.login(user)
     .then(res => {
       console.log('success')
@@ -68,7 +68,7 @@ export const logout = () => dispatch => {
   dispatch(logoutUser())
 };
 
-export const getUserInfo = () => (dispatch) => {
+export const getUserInfo = () => dispatch => {
   return APIUtil.getUserInfo().then((res) =>
     dispatch(receiveUserInfo(res.data))
   );
