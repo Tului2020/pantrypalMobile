@@ -76,9 +76,8 @@ class LoginPage extends React.Component {
     password: this.state.password
   };
 
-  this.props.login(user)
-  const {navigation} = this.props;
-  navigation.navigate('PantryPage')
+  const {navigation, login} = this.props;
+  login(user)
 
   }
 
