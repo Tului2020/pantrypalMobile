@@ -26,7 +26,6 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    // debugger
     return (
       <View style={styles.view}>
         {/* <Image source={require('../images/pantrypal.png')} style={styles.img}/> */}
@@ -65,7 +64,7 @@ class LoginPage extends React.Component {
   }
 
   componentDidUpdate() {
-    debugger
+    if (this.props.isAuthenticated) this.props.navigation.navigate('PantryPage')
   }
 
 
