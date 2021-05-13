@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, TextInput, Button, StyleSheet} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import * as AsyncStorageAll from '@react-native-community/async-storage';
+const AsyncStorage = AsyncStorageAll.default
 
 
 class PantryPage extends React.Component {

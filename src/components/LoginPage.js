@@ -16,16 +16,17 @@ import computerIPAddress from '../../IPAddress'
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
+
+    // all bindings
     this.userLoginAction = this.userLoginAction.bind(this);
     this.pressHandler = this.pressHandler.bind(this);
     this.usernameInput = this.usernameInput.bind(this);
     this.passwordInput = this.passwordInput.bind(this);
-    _storeData = _storeData.bind(this);
-    
+    this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
+
+    // declaring state
     this.state = {username: '', password: '', tempPhrase: ''}
 
-
-    this.changeStoragePhrase = this.changeStoragePhrase.bind(this);
   }
 
   render() {
@@ -41,12 +42,8 @@ class LoginPage extends React.Component {
         <Button title='Demo' onPress={this.pressHandler}/>
 
         <TextInput value={this.state.tempPhrase} placeholder='TempStorage' style={styles.input} onChangeText={this.changeStoragePhrase}/>
-        {/* <TextInput value={this.state.tempPhrase} style={styles.input} onChange={this.changeStoragePhrase}/> */}
-        <Button title='Save Data' onPress={() => {
-          _storeData()
-        
-        }}/>
 
+        <Button title='Save Data' onPress={() => _storeData(this.state.tempPhrase)}/>
         <Button title='See Data' onPress={() =>_retrieveData()}/>
 
 
@@ -72,6 +69,7 @@ class LoginPage extends React.Component {
 
   pressHandler() {
     this.setState({username: 'demo@gmail.com', password: '123456'})
+    this.userLoginAction();
   }
 
   userLoginAction() {
@@ -135,12 +133,12 @@ const LoginFormContainer = connect(
 )(LoginPage);
 
 
-_storeData = async () => {
+_storeData = async (token) => {
   // debugger
   try {
     await AsyncStorage.setItem(
       '@MySuperStore:key',
-      'I like to save it.'
+      token
     );
   } catch (error) {
     // Error saving data
