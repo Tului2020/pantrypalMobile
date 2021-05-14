@@ -17,7 +17,7 @@ class PantryPage extends React.Component {
   render() {
     return (
       // 
-      <View>
+      <View style={styles.view}>
         <Text>This is the Pantry Page</Text>
         <Button title='Logout' onPress={this.userLogoutAction}/>
       </View>
@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
     height: `80%`,
     marginTop: `20%`,
     marginRight: 10,
+  },
+  view: {
+    paddingTop: 80,
+    alignItems: 'center'
   }
 })
 

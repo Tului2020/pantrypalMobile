@@ -17,7 +17,7 @@ class LoginPage extends React.Component {
 
     // declaring state
     this.state = {email: 'demo@gmail.com', password: '123456'}
-
+    this.userLoginAction();
   }
 
   render() {
