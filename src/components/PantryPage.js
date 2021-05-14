@@ -9,7 +9,10 @@ class PantryPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {searching: ''}
+
     // all bindings
+    this.updateSearch = this.updateSearch.bind(this);
     this.userLogoutAction = this.userLogoutAction.bind(this);
 
   }
@@ -24,24 +27,23 @@ class PantryPage extends React.Component {
     )
   }
 
-
-  searchComponent() {
-    return (
-      <View>
-        <TextInput style={styles.input} placeholder='Search for ingredients...' />
-      </View>
-    )
-  }
-
-
-
   userLogoutAction() {
     const {navigation, logout} = this.props;
     logout();
     navigation.navigate('LoginPage')
   }
 
-  
+  searchComponent() {
+    return (
+      <View>
+        <TextInput style={styles.input} placeholder='Search for ingredients...' value={this.state.searching} onChangeText={this.updateSearch}/>
+      </View>
+    )
+  }
+
+  updateSearch(newSearchVal) {
+    this.setState({searching: newSearchVal})
+  }
 
 
 }
