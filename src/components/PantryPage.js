@@ -18,11 +18,22 @@ class PantryPage extends React.Component {
     return (
       // 
       <View style={styles.view}>
-        <Text>This is the Pantry Page</Text>
+        {this.searchComponent()}
         <Button title='Logout' onPress={this.userLogoutAction}/>
       </View>
     )
   }
+
+
+  searchComponent() {
+    return (
+      <View>
+        <TextInput style={styles.input} placeholder='Search for ingredients...' />
+      </View>
+    )
+  }
+
+
 
   userLogoutAction() {
     const {navigation, logout} = this.props;

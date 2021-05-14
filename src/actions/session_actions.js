@@ -44,6 +44,7 @@ export const signup = user => dispatch => (
 
 
 export const login = user => dispatch => {
+  console.log('clicked')
   APIUtil.login(user)
     .then(res => {
       console.log('success')

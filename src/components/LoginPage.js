@@ -51,10 +51,11 @@ class LoginPage extends React.Component {
   }
 
   userLoginAction() {
+
     let { email, password } = this.state
     let user = { email, password };
 
-    const {navigation, login} = this.props;
+    const {login} = this.props;
     login(user)
   }
 
