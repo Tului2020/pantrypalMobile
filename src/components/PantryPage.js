@@ -28,7 +28,6 @@ class PantryPage extends React.Component {
     const {navigation, logout} = this.props;
     logout();
     navigation.navigate('LoginPage')
-
   }
 
   
