@@ -45,9 +45,9 @@ class PantryPage extends React.Component {
     this.setState({searching: newSearchVal})
   }
 
-  componentDidMount() {
-    debugger
-  }
+  // componentDidMount() {
+  //   debugger
+  // }
 
 
 
