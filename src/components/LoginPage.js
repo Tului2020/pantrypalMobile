@@ -16,7 +16,7 @@ class LoginPage extends React.Component {
     this.passwordInput = this.passwordInput.bind(this);
 
     // declaring state
-    this.state = {email: 'demo@gmail.com', password: '123456'}
+    this.state = {email: 'demo@gmail.com', password: '123456', loginWaiting: false}, 
     this.userLoginAction();
   }
 
@@ -51,16 +51,19 @@ class LoginPage extends React.Component {
   }
 
   userLoginAction() {
-
     let { email, password } = this.state
     let user = { email, password };
-
     const {login} = this.props;
     login(user)
+
+    this.setState({loginWaiting: true})
   }
 
   componentDidUpdate() {
-    if (this.props.isAuthenticated) this.props.navigation.navigate('PantryPage')
+    if (this.props.isAuthenticated) {
+      this.props.navigation.navigate('PantryPage');
+      this.setState({loginWaiting: false})
+    }
   }
 
 
