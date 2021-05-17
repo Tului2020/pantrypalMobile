@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {View, Text, Image, TextInput, Button, StyleSheet} from 'react-native';
+import {View, Text, Image, TextInput, Button, StyleSheet, FlatList} from 'react-native';
 import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
 import { logout } from '../actions/session_actions';
 
@@ -18,6 +18,7 @@ class PantryPage extends React.Component {
   }
 
   render() {
+
     return (
       // 
       <View style={styles.view}>
@@ -37,6 +38,7 @@ class PantryPage extends React.Component {
     return (
       <View>
         <TextInput style={styles.input} placeholder='Search for ingredients...' value={this.state.searching} onChangeText={this.updateSearch}/>
+        {this.listView()}
       </View>
     )
   }
@@ -45,11 +47,24 @@ class PantryPage extends React.Component {
     this.setState({searching: newSearchVal})
   }
 
-  // componentDidMount() {
-  //   debugger
-  // }
 
 
+  listView() {
+    const { ingredients } = this.props;
+    console.log(ingredients.map(el => ({key: el.name})))
+
+
+    return (
+      <FlatList
+        data={ingredients.map(el => ({key: el.name}))}
+        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+      />
+    )
+  }
+
+  tileView() {
+
+  }
 
 }
 
@@ -69,22 +84,26 @@ const styles = StyleSheet.create({
   view: {
     paddingTop: 80,
     alignItems: 'center'
-  }
+  },
+  ingredientsContainer: {
+    flex: 1,
+    paddingTop: 22
+   },
+   item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
 })
 
 
-const mapStateToProps = ({errors, session}) => {
-  return {
-    errors: errors.session,
-    isAuthenticated: session.isAuthenticated
-  };
-};
+const mapStateToProps = ({entities}) => ({
+  ingredients: entities.ingredients
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logout: () => dispatch(logout()),
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(logout()),
+})
 
 const PantryPageContainer = connect(
   mapStateToProps,
