@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { login } from '../actions/session_actions';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class LoginPage extends React.Component {
@@ -16,8 +16,9 @@ class LoginPage extends React.Component {
     this.passwordInput = this.passwordInput.bind(this);
 
     // declaring state
-    this.state = {email: 'demo@gmail.com', password: '123456'}
-    this.userLoginAction();
+    this.state = {email: 'demo@gmail.com', password: '123456', loginWaiting: false} 
+    setTimeout(this.userLoginAction, 200)
+    
   }
 
   render() {
@@ -28,12 +29,27 @@ class LoginPage extends React.Component {
           <TextInput value={this.state.email} placeholder='Email' style={styles.input} onChangeText={this.emailInput}/>
           <TextInput value={this.state.password} placeholder='Password' style={styles.input} onChangeText={this.passwordInput} secureTextEntry={true}/>
         </View>
-        <Button title='Login' onPress={this.userLoginAction}/>
+
+        {this.renderLoginButton()}
         <Button title='Demo' onPress={this.pressHandler}/>
       </View>
     )
   }
 
+  renderLoginButton() {
+    const { loginWaiting } = this.state;
+    return (
+      (loginWaiting) ? 
+        (<Button title='Loading' icon={
+          <Icon
+            name="arrow-right"
+            size={15}
+            color="white"
+          />
+        } onPress={this.userLoginAction}/>) : 
+        (<Button title='Login' onPress={this.userLoginAction}/>) 
+    )
+  }
 
 
   emailInput(email) {
@@ -53,13 +69,17 @@ class LoginPage extends React.Component {
   userLoginAction() {
     let { email, password } = this.state
     let user = { email, password };
-
-    const {navigation, login} = this.props;
+    const {login} = this.props;
     login(user)
+
+    this.setState({loginWaiting: true})
   }
 
   componentDidUpdate() {
-    if (this.props.isAuthenticated) this.props.navigation.navigate('PantryPage')
+    if (this.props.isAuthenticated) {
+      this.props.navigation.navigate('PantryPage');
+      if (this.state.loginWaiting) this.setState({loginWaiting: false})
+    }
   }
 
 
