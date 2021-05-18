@@ -4,6 +4,8 @@ import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'rea
 import { storeDataLocal, retrieveDataLocal, removeDataLocal } from '../AsyncStorageHandler'
 import { logout } from '../actions/session_actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { updateUser } from '../actions/user_actions';
+
 
 
 class PantryPage extends React.Component {
@@ -52,7 +54,7 @@ class PantryPage extends React.Component {
 
   alertItemName = (item) => {
     alert(item.name)
- }
+  }
 
   listView() {
     const { ingredients } = this.props;
@@ -61,11 +63,13 @@ class PantryPage extends React.Component {
       ingredients.map(item => (
         <TouchableOpacity
           key={item.id}
-          style={styles.ingredientsList}>
+          style={styles.ingredientsList}
+        // onPress={() => this.removeIngredient(item.name)}
+        >
           <Text style={styles.text}>
             {item.name}
           </Text>
-          <Icon name='minus' size={20}onPress={() => console.log('pressed')}/>
+          <Icon name='minus' size={20} style={styles.deleteButton} onPress={() => this.removeIngredient(item.name)} />
         </TouchableOpacity>
       ))
     )
@@ -79,8 +83,14 @@ class PantryPage extends React.Component {
 
   }
 
-  removeIngredient() {
+  removeIngredient(name) {
+    // redux
+    const { ingredients, updateIngredients } = this.props;
+    const newIngredients = ingredients.filter(el => el.name !== name);
+    updateIngredients(newIngredients);
 
+    // MongoDB
+    
   }
 
 
@@ -88,16 +98,25 @@ class PantryPage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  deleteButton: {
+    paddingLeft: 12,
+    width: 30,
+    height: '100%',
+    borderWidth: 1
+  },
+
   input: {
     borderWidth: 1,
     borderRadius: 8,
     width: 200,
     height: 40,
   },
+
   view: {
     paddingTop: 40,
     alignItems: 'center'
   },
+
   item: {
     padding: 10,
     fontSize: 18,
@@ -106,16 +125,15 @@ const styles = StyleSheet.create({
   },
 
   ingredientsList: {
-    padding: 10,
+    padding: 7,
     marginTop: 3,
     backgroundColor: '#d9f9b1',
-    alignItems: 'center',
     flexDirection: "row",
     justifyContent: 'space-between'
- },
- text: {
+  },
+  text: {
     color: '#4f603c'
- }
+  }
 })
 
 
@@ -125,6 +143,7 @@ const mapStateToProps = ({ entities }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
+  updateIngredients: (ingredients) => dispatch(updateUser({ingredients}))
 })
 
 const PantryPageContainer = connect(
