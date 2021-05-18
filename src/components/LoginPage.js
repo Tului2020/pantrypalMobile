@@ -16,9 +16,9 @@ class LoginPage extends React.Component {
     this.passwordInput = this.passwordInput.bind(this);
 
     // declaring state
-    this.state = {email: 'demo@gmail.com', password: '123456', loginWaiting: false} 
+    this.state = { email: 'demo@gmail.com', password: '123456', loginWaiting: false }
     setTimeout(this.userLoginAction, 200)
-    
+
   }
 
   render() {
@@ -26,12 +26,12 @@ class LoginPage extends React.Component {
       <View style={styles.view}>
         {/* <Image source={require('../images/pantrypal.png')} style={styles.img}/> */}
         <View style={styles.view}>
-          <TextInput value={this.state.email} placeholder='Email' style={styles.input} onChangeText={this.emailInput}/>
-          <TextInput value={this.state.password} placeholder='Password' style={styles.input} onChangeText={this.passwordInput} secureTextEntry={true}/>
+          <TextInput value={this.state.email} placeholder='Email' style={styles.input} onChangeText={this.emailInput} />
+          <TextInput value={this.state.password} placeholder='Password' style={styles.input} onChangeText={this.passwordInput} secureTextEntry={true} />
         </View>
 
         {this.renderLoginButton()}
-        <Button title='Demo' onPress={this.pressHandler}/>
+        <Button title='Demo' onPress={this.pressHandler} />
       </View>
     )
   }
@@ -39,46 +39,46 @@ class LoginPage extends React.Component {
   renderLoginButton() {
     const { loginWaiting } = this.state;
     return (
-      (loginWaiting) ? 
+      (loginWaiting) ?
         (<Button title='Loading' icon={
           <Icon
             name="arrow-right"
             size={15}
             color="white"
           />
-        } onPress={this.userLoginAction}/>) : 
-        (<Button title='Login' onPress={this.userLoginAction}/>) 
+        } onPress={this.userLoginAction} />) :
+        (<Button title='Login' onPress={this.userLoginAction} />)
     )
   }
 
 
   emailInput(email) {
-    this.setState({email})
+    this.setState({ email })
   }
 
   passwordInput(password) {
-    this.setState({password})
+    this.setState({ password })
   }
 
 
   pressHandler() {
-    this.setState({email: 'demo@gmail.com', password: '123456'})
+    this.setState({ email: 'demo@gmail.com', password: '123456' })
     this.userLoginAction();
   }
 
   userLoginAction() {
     let { email, password } = this.state
     let user = { email, password };
-    const {login} = this.props;
+    const { login } = this.props;
     login(user)
 
-    this.setState({loginWaiting: true})
+    this.setState({ loginWaiting: true })
   }
 
   componentDidUpdate() {
     if (this.props.isAuthenticated) {
       this.props.navigation.navigate('PantryPage');
-      if (this.state.loginWaiting) this.setState({loginWaiting: false})
+      if (this.state.loginWaiting) this.setState({ loginWaiting: false })
     }
   }
 
@@ -96,12 +96,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     width: 200,
-    height: 40,  
+    height: 40,
   },
   loginView: {
     position: 'absolute',
     marginTop: 40
-  },  
+  },
 
   view: {
     paddingTop: 40,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
 
 
 
-const mapStateToProps = ({errors, session}) => {
+const mapStateToProps = ({ errors, session }) => {
   return {
     errors: errors.session,
     isAuthenticated: session.isAuthenticated

@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {View, Text, Image, TextInput, Button, StyleSheet, FlatList} from 'react-native';
-import {storeDataLocal, retrieveDataLocal, removeDataLocal} from '../AsyncStorageHandler'
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { storeDataLocal, retrieveDataLocal, removeDataLocal } from '../AsyncStorageHandler'
 import { logout } from '../actions/session_actions';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class PantryPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {searching: ''}
+    this.state = { searching: '', viewType: 'list' }
 
     // all bindings
     this.updateSearch = this.updateSearch.bind(this);
@@ -23,48 +24,66 @@ class PantryPage extends React.Component {
       // 
       <View style={styles.view}>
         {this.searchComponent()}
-        <Button title='Logout' onPress={this.userLogoutAction}/>
+        <Button title='Logout' onPress={this.userLogoutAction} />
       </View>
     )
   }
 
   userLogoutAction() {
-    const {navigation, logout} = this.props;
+    const { navigation, logout } = this.props;
     logout();
     navigation.navigate('LoginPage')
   }
 
   searchComponent() {
+    const { viewType } = this.state;
+
     return (
       <View>
-        <TextInput style={styles.input} placeholder='Search for ingredients...' value={this.state.searching} onChangeText={this.updateSearch}/>
-        {this.listView()}
+        <TextInput style={styles.input} placeholder='Search for ingredients...' value={this.state.searching} onChangeText={this.updateSearch} />
+        {(viewType === 'list') ? this.listView() : this.tileView()}
       </View>
     )
   }
 
   updateSearch(newSearchVal) {
-    this.setState({searching: newSearchVal})
+    this.setState({ searching: newSearchVal })
   }
 
-
+  alertItemName = (item) => {
+    alert(item.name)
+ }
 
   listView() {
     const { ingredients } = this.props;
-    console.log(ingredients.map(el => ({key: el.name})))
-
 
     return (
-      <FlatList
-        data={ingredients.map(el => ({key: el.name}))}
-        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-      />
+      ingredients.map(item => (
+        <TouchableOpacity
+          key={item.id}
+          style={styles.ingredientsList}>
+          <Text style={styles.text}>
+            {item.name}
+          </Text>
+          <Icon name='minus' size={20}onPress={() => console.log('pressed')}/>
+        </TouchableOpacity>
+      ))
     )
   }
 
   tileView() {
 
   }
+
+  addIngredient() {
+
+  }
+
+  removeIngredient() {
+
+  }
+
+
 
 }
 
@@ -73,31 +92,34 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     width: 200,
-    height: 40,  
-  },
-  img: {
-    width: `100%`,
-    height: `80%`,
-    marginTop: `20%`,
-    marginRight: 10,
+    height: 40,
   },
   view: {
-    paddingTop: 80,
+    paddingTop: 40,
     alignItems: 'center'
   },
-  ingredientsContainer: {
-    flex: 1,
-    paddingTop: 22
-   },
-   item: {
+  item: {
     padding: 10,
     fontSize: 18,
     height: 44,
+    borderWidth: 1,
   },
+
+  ingredientsList: {
+    padding: 10,
+    marginTop: 3,
+    backgroundColor: '#d9f9b1',
+    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: 'space-between'
+ },
+ text: {
+    color: '#4f603c'
+ }
 })
 
 
-const mapStateToProps = ({entities}) => ({
+const mapStateToProps = ({ entities }) => ({
   ingredients: entities.ingredients
 });
 
