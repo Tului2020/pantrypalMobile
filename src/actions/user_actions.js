@@ -50,5 +50,5 @@ export const updateUser = (data, updateMDB=true) => dispatch => {
   if (data.ingredients) dispatch(receiveIngredients(data.ingredients))
   if (data.recipes) dispatch(receiveRecipes(data.recipes))
   if (data.saved_recipes) dispatch(receiveSavedRecipes(data.saved_recipes))
-  if (updateMDB) {UserApiUtil.updateUser(data)}
+  if (updateMDB) UserApiUtil.updateUser(data)
 }

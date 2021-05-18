@@ -63,13 +63,14 @@ class PantryPage extends React.Component {
       ingredients.map(item => (
         <TouchableOpacity
           key={item.id}
-          style={styles.ingredientsList}
-        // onPress={() => this.removeIngredient(item.name)}
-        >
+          style={styles.ingredientsList}>
           <Text style={styles.text}>
             {item.name}
           </Text>
-          <Icon name='minus' size={20} style={styles.deleteButton} onPress={() => this.removeIngredient(item.name)} />
+          <View style={styles.deleteButton} onStartShouldSetResponder={() => this.removeIngredient(item.name)}> 
+          {/* View does not have onPress, instead it has onStartShouldSetResponder function */}
+            <Icon name='minus' size={20} onPress={() => this.removeIngredient(item.name)}/>
+          </View>
         </TouchableOpacity>
       ))
     )
@@ -79,7 +80,10 @@ class PantryPage extends React.Component {
 
   }
 
-  addIngredient() {
+  addIngredient(item) {
+    const { ingredients, updateIngredients } = this.props;
+    const newIngredients = Object.assign({}, ingredients, item);
+    updateIngredients(newIngredients);
 
   }
 
@@ -90,7 +94,7 @@ class PantryPage extends React.Component {
     updateIngredients(newIngredients);
 
     // MongoDB
-    
+
   }
 
 
@@ -99,11 +103,13 @@ class PantryPage extends React.Component {
 
 const styles = StyleSheet.create({
   deleteButton: {
-    paddingLeft: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 30,
-    height: '100%',
-    borderWidth: 1
+    height: 30,
+    // borderWidth: 1
   },
+
 
   input: {
     borderWidth: 1,
@@ -118,22 +124,20 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    padding: 10,
+    // padding: 7,
     fontSize: 18,
     height: 44,
-    borderWidth: 1,
   },
 
   ingredientsList: {
-    padding: 7,
+    // padding: 7,
     marginTop: 3,
     backgroundColor: '#d9f9b1',
     flexDirection: "row",
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  text: {
-    color: '#4f603c'
-  }
+
 })
 
 
@@ -143,7 +147,7 @@ const mapStateToProps = ({ entities }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(logout()),
-  updateIngredients: (ingredients) => dispatch(updateUser({ingredients}))
+  updateIngredients: (ingredients) => dispatch(updateUser({ ingredients }, false))
 })
 
 const PantryPageContainer = connect(
