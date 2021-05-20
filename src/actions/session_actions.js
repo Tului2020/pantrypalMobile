@@ -56,7 +56,9 @@ export const login = user => dispatch => {
       dispatch(updateUser(userInfo, false))
     })
     .catch(err => {
-      console.log(err)
+      // console.log(err)
+      debugger
+      console.log('error has happened')
       dispatch(receiveErrors(err));
     })
 } 
