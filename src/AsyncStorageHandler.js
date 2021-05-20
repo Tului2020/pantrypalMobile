@@ -1,4 +1,4 @@
-import * as AsyncStorageAll from '@react-native-community/async-storage';
+import * as AsyncStorageAll from '@react-native-async-storage/async-storage';
 const AsyncStorage = AsyncStorageAll.default
 
 const defaultKey = 'jwtToken'
