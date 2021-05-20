@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { storeDataLocal, retrieveDataLocal, removeDataLocal } from '../AsyncStorageHandler'
 import { logout } from '../actions/session_actions';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import { updateUser } from '../actions/user_actions';
 
 
@@ -69,7 +69,7 @@ class PantryPage extends React.Component {
           </Text>
           <View style={styles.deleteButton} onStartShouldSetResponder={() => this.removeIngredient(item.name)}> 
           {/* View does not have onPress, instead it has onStartShouldSetResponder function */}
-            <Icon name='minus' size={20} onPress={() => this.removeIngredient(item.name)}/>
+            {/* <Icon name='minus' size={20} onPress={() => this.removeIngredient(item.name)}/> */}
           </View>
         </TouchableOpacity>
       ))

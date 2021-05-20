@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, Button, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { login } from '../actions/session_actions';
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class LoginPage extends React.Component {
@@ -40,13 +40,7 @@ class LoginPage extends React.Component {
     const { loginWaiting } = this.state;
     return (
       (loginWaiting) ?
-        (<Button title='Loading' icon={
-          <Icon
-            name="arrow-right"
-            size={15}
-            color="white"
-          />
-        } onPress={this.userLoginAction} />) :
+        (<Button title='Loading' onPress={this.userLoginAction} />) :
         (<Button title='Login' onPress={this.userLoginAction} />)
     )
   }
