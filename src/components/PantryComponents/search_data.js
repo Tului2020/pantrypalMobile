@@ -11406,6 +11406,8 @@ let ingredients = [
   }
 ]
 
+// module.exports = ingredients; // old way of exporting
+
 export default ingredients;
 
 
