@@ -1,5 +1,5 @@
-// import allIngredients from './search_data';
-const ingredients = require('./search_data')
+import ingredients from './search_data'; // ES6 way of importing
+// const ingredients = require('./search_data')
 
 const searchIngredient = (searchQuery) => {
   let names = {}
@@ -20,5 +20,5 @@ const searchIngredient = (searchQuery) => {
   return queryArrayPrimary.concat(queryArraySecondary);
 }
 
-
-console.log(searchIngredient('apple'))
+// module.exports = searchIngredient
+export default searchIngredient; // ES6 way of exporting
